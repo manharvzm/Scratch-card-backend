@@ -20,6 +20,6 @@ app.options('/api/check', cors(corsOptions));
 app.options('/api/claim', cors(corsOptions));
 
 // ✅ Still mount your routes as /
-app.use('/', scratchRoutes);
+app.use('/api', scratchRoutes);
 
 module.exports = app;
