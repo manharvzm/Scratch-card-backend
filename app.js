@@ -15,9 +15,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-app.options('/scratch/check', cors(corsOptions));
-app.options('/scratch/claim', cors(corsOptions));
-
-app.use('/scratch', scratchRoutes);
+// ✅ Remove route prefix
+app.options('/check', cors(corsOptions));
+app.options('/claim', cors(corsOptions));
+app.use('/', scratchRoutes); // no prefix
 
 module.exports = app;
