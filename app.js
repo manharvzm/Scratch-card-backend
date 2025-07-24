@@ -13,7 +13,11 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+app.use(bodyParser.json());
 
-app.use('/scratch', scratchRoutes); 
+app.options('/scratch/check', cors(corsOptions));
+app.options('/scratch/claim', cors(corsOptions));
+
+app.use('/scratch', scratchRoutes);
+
 module.exports = app;
