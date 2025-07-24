@@ -15,9 +15,11 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-// ✅ Remove route prefix
-app.options('/check', cors(corsOptions));
-app.options('/claim', cors(corsOptions));
-app.use('/', scratchRoutes); // no prefix
+// ✅ Match full Vercel-exposed route paths
+app.options('/api/check', cors(corsOptions));
+app.options('/api/claim', cors(corsOptions));
+
+// ✅ Still mount your routes as /
+app.use('/', scratchRoutes);
 
 module.exports = app;
