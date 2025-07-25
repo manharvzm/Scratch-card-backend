@@ -1,11 +1,11 @@
 const pool = require('../config/db');
 
 exports.saveEntry = async (req, res) => {
-  const { name, mobile, email, prize } = req.body;
+  const { name, mobile, prize } = req.body;
   try {
     const result = await pool.query(
-      'INSERT INTO scratch_entries (name, mobile, email, prize) VALUES ($1, $2, $3, $4) RETURNING *',
-      [name, mobile, email, prize]
+      'INSERT INTO scratch_entries (name, mobile, prize) VALUES ($1, $2, $3) RETURNING *',
+      [name, mobile, prize]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
