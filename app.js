@@ -1,25 +1,17 @@
+// app.js
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const scratchRoutes = require('./routes/scratchRoutes');
 
 const app = express();
 
-const corsOptions = {
-  origin: 'https://manharshoppingmall.vercel.app',
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
+app.use(cors({
+  origin: 'https://manharshoppingmall.vercel.app', // your frontend domain
+  methods: ['GET', 'POST'],
   credentials: true
-};
+}));
 
-app.use(cors(corsOptions));
-app.use(bodyParser.json());
-
-// ✅ Match full Vercel-exposed route paths
-app.options('/api/check', cors(corsOptions));
-app.options('/api/claim', cors(corsOptions));
-
-// ✅ Still mount your routes as /
+app.use(express.json());
 app.use('/api', scratchRoutes);
 
 module.exports = app;
